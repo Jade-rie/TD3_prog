@@ -19,7 +19,7 @@ void bubble_sort(std::vector<int> &vec)
         }
     }
 }
-
+//la
 int main()
 {
     std::vector<int> array{100, 24, 3, 47, 35, 69, 97, 27, 100, 56};
