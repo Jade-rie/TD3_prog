@@ -1,7 +1,24 @@
 #include <vector>
+#include <cstdlib>
 #include <algorithm>
 #include <iostream>
+#include "ScopedTimer.hpp"
+
 bool is_sorted(std::vector<int> const &vec) { return std::is_sorted(vec.begin(), vec.end()); }
+
+void bubble_sort(std::vector<int> &vec)
+{
+    while (!is_sorted(vec))
+    {
+        for (int i = 0; i < vec.size(); i++)
+        {
+            if (vec[i] > vec[i + 1])
+            {
+                std::swap(vec[i], vec[i + 1]);
+            }
+        }
+    }
+}
 
 size_t quick_sort_partition(std::vector<int> &vec, size_t left, size_t right)
 {
@@ -49,10 +66,36 @@ void quick_sort(std::vector<int> &vec)
     quick_sort(vec, 0, vec.size() - 1);
 }
 
+std::vector<int> generate_random_vector(size_t const size, int const max = 100)
+{
+    std::vector<int> vec(size);
+    std::generate(vec.begin(), vec.end(), [&max]()
+                  { return std::rand() % max; });
+    return vec;
+}
+
 int main()
 {
-    std::vector<int> array{100, 24, 3, 47, 35, 69, 97, 27, 100, 56};
-    quick_sort(array);
+    std::vector<int> array = generate_random_vector(100);
+
+    {
+        ScopedTimer timer("bubble_sort");
+
+        bubble_sort(array);
+    }
+
+    {
+        ScopedTimer timer("quick_sort");
+
+        quick_sort(array);
+    }
+
+    {
+        ScopedTimer timer("sort");
+
+        std::sort(array.begin(), array.end());
+    }
+
     if (is_sorted(array))
     {
         std::cout << "Le tableau est trié" << std::endl;
