@@ -1,6 +1,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+
 bool is_sorted(std::vector<int> const &vec) { return std::is_sorted(vec.begin(), vec.end()); }
 
 size_t quick_sort_partition(std::vector<int> &vec, size_t left, size_t right)
@@ -32,7 +33,6 @@ size_t quick_sort_partition(std::vector<int> &vec, size_t left, size_t right)
 
 void quick_sort(std::vector<int> &vec, size_t const left, size_t const right)
 {
-
     if (left < right)
     {
         size_t pivot = quick_sort_partition(vec, left, right);

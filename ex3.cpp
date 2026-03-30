@@ -80,19 +80,16 @@ int main()
 
     {
         ScopedTimer timer("bubble_sort");
-
         bubble_sort(array);
     }
 
     {
         ScopedTimer timer("quick_sort");
-
         quick_sort(array);
     }
 
     {
         ScopedTimer timer("sort");
-
         std::sort(array.begin(), array.end());
     }
 
